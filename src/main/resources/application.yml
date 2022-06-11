@@ -1,0 +1,27 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+    url: jdbc:mysql://localhost:3329/bookplate?useSSL=false&serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: ''
+  messages:
+    basename: i18n/exception
+    encoding: UTF-8
+  jpa:
+    hibernate:
+      ddl-auto: create # create :  Re-create at the time the application runs
+    properties:
+      hibernate:
+        #show_sql: true Output from systemout / In a production environment, logs should be taken through a logger
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug  #You can see all the sql that hibernate produces. Output via logger
+    #org.hibernate.type: trace #You can see type of values p6py
+
+server:
+  port: 5324
