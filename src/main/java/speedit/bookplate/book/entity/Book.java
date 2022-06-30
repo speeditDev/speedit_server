@@ -1,7 +1,9 @@
 package speedit.bookplate.book.entity;
 
 import lombok.Getter;
+import speedit.bookplate.booklike.entity.BookLike;
 import speedit.bookplate.feed.entity.Feed;
+import speedit.bookplate.scrap.entity.Scrap;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +27,12 @@ public class Book {
 
     @OneToMany(mappedBy = "book")
     private List<Feed> feeds= new ArrayList<>();
+
+    @OneToMany(mappedBy = "book")
+    private List<BookLike> bookLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "book")
+    private List<Scrap> scraps = new ArrayList<>();
 
     private String bookName;
 

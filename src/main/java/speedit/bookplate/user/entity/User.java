@@ -1,7 +1,10 @@
 package speedit.bookplate.user.entity;
 
 import lombok.Getter;
+import speedit.bookplate.booklike.entity.BookLike;
 import speedit.bookplate.feed.entity.Feed;
+import speedit.bookplate.feedlike.entity.FeedLike;
+import speedit.bookplate.scrap.entity.Scrap;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;
 import speedit.bookplate.user.entity.enumTypes.UserType;
 
@@ -27,6 +30,15 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Feed> feeds = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<BookLike> bookLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<FeedLike> feedLikes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Scrap> scraps = new ArrayList<>();
 
     private String name;
 

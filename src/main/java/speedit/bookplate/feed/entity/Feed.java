@@ -2,10 +2,14 @@ package speedit.bookplate.feed.entity;
 
 import lombok.Getter;
 import speedit.bookplate.book.entity.Book;
+import speedit.bookplate.feedlike.entity.FeedLike;
+import speedit.bookplate.scrap.entity.Scrap;
 import speedit.bookplate.user.entity.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,6 +32,9 @@ public class Feed {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookIdx")
     private Book book;
+
+    @OneToMany(mappedBy = "feed")
+    private List<FeedLike> feedLikes = new ArrayList<>();
 
     private String contents;
 
