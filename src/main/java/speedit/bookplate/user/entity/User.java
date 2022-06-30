@@ -4,6 +4,7 @@ import lombok.Getter;
 import speedit.bookplate.booklike.entity.BookLike;
 import speedit.bookplate.feed.entity.Feed;
 import speedit.bookplate.feedlike.entity.FeedLike;
+import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.scrap.entity.Scrap;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;
 import speedit.bookplate.user.entity.enumTypes.UserType;
@@ -39,6 +40,12 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Scrap> scraps = new ArrayList<>();
+
+    @OneToMany(mappedBy = "follower_user")
+    private List<Follow> follower_follows = new ArrayList<>();
+
+    @OneToMany(mappedBy = "followed_user")
+    private List<Follow> followed_follows = new ArrayList<>();
 
     private String name;
 
