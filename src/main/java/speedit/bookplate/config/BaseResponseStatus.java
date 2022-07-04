@@ -19,8 +19,6 @@ public enum BaseResponseStatus {
     EMPTY_JWT(false,401,"JWT를 입력해주세요"),
     INVALID_JWT(false,402,"유효하지 않은 JWT입니다.");
 
-
-
     private final boolean isSuccess;
     private final int code;
     private final String message;
