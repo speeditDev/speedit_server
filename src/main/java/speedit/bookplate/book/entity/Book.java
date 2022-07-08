@@ -9,7 +9,6 @@ import speedit.bookplate.scrap.entity.Scrap;
 import speedit.bookplate.user.entity.BaseTimeEntity;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 

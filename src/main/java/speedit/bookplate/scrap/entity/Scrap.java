@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import speedit.bookplate.book.entity.Book;
-import speedit.bookplate.feed.entity.Feed;
 import speedit.bookplate.user.entity.BaseTimeEntity;
 import speedit.bookplate.user.entity.User;
 

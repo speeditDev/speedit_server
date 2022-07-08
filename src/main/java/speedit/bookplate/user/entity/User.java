@@ -12,6 +12,7 @@ import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.scrap.entity.Scrap;
 import speedit.bookplate.user.entity.enumTypes.Gender;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;
+import speedit.bookplate.user.entity.enumTypes.UserStatus;
 import speedit.bookplate.user.entity.enumTypes.UserType;
 
 import javax.persistence.*;
@@ -33,7 +34,11 @@ public class User extends BaseTimeEntity{
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserType status;
+    private UserStatus status;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
@@ -77,7 +82,7 @@ public class User extends BaseTimeEntity{
 
     private String company;
 
-    private String token;
+    private String token; //FCM 토큰 정보
 
     @Column(nullable = false)
     private Boolean notification;

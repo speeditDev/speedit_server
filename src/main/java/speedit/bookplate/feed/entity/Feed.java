@@ -9,7 +9,6 @@ import lombok.ToString;
 import speedit.bookplate.book.entity.Book;
 import speedit.bookplate.feed.entity.enumTypes.Status;
 import speedit.bookplate.feedlike.entity.FeedLike;
-import speedit.bookplate.scrap.entity.Scrap;
 import speedit.bookplate.user.entity.BaseTimeEntity;
 import speedit.bookplate.user.entity.User;
 

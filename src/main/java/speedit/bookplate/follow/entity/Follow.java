@@ -7,8 +7,6 @@ import speedit.bookplate.user.entity.BaseTimeEntity;
 import speedit.bookplate.user.entity.User;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
