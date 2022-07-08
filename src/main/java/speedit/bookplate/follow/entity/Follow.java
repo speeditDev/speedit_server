@@ -1,15 +1,18 @@
 package speedit.bookplate.follow.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import speedit.bookplate.user.entity.BaseTimeEntity;
 import speedit.bookplate.user.entity.User;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
-public class Follow implements Serializable {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "follow")
+public class Follow extends BaseTimeEntity {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,17 +24,4 @@ public class Follow implements Serializable {
     @JoinColumn(name = "userIdx")
     private User followed_user;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }
