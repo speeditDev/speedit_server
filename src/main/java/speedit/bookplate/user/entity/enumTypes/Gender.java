@@ -5,6 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum UserType {
-    ACTIVE,INACTIVE
+public enum Gender {
+    //M: 남자, W: 여자
+    M,W
 }

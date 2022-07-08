@@ -1,17 +1,23 @@
 package speedit.bookplate.scrap.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import speedit.bookplate.book.entity.Book;
 import speedit.bookplate.feed.entity.Feed;
+import speedit.bookplate.user.entity.BaseTimeEntity;
 import speedit.bookplate.user.entity.User;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDateTime;
+
 
 @Entity
 @Getter
-public class Scrap implements Serializable {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(of = {"status"})
+@Table(name = "scrap")
+public class Scrap extends BaseTimeEntity {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,19 +29,7 @@ public class Scrap implements Serializable {
     @JoinColumn(name = "bookIdx")
     private Book book;
 
+    @Column(nullable = false)
     private Boolean status;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }

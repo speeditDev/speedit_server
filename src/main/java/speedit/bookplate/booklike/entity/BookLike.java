@@ -1,7 +1,10 @@
 package speedit.bookplate.booklike.entity;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import speedit.bookplate.book.entity.Book;
+import speedit.bookplate.user.entity.BaseTimeEntity;
 import speedit.bookplate.user.entity.User;
 
 import javax.persistence.*;
@@ -11,7 +14,9 @@ import java.util.Objects;
 
 @Entity
 @Getter
-public class BookLike implements Serializable {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "bookLike")
+public class BookLike extends BaseTimeEntity {
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
@@ -23,17 +28,4 @@ public class BookLike implements Serializable {
     @JoinColumn(name = "bookIdx")
     private Book book;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
 }
