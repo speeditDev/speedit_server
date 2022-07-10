@@ -3,8 +3,10 @@ package speedit.bookplate.oAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.oAuth.dto.PostOauthReq;
 import speedit.bookplate.oAuth.dto.PostOauthRes;
@@ -20,12 +22,16 @@ public class oAuthController {
         this.oAuthService = oAuthService;
     }
 
-    /*
     @ResponseBody
     @PostMapping("/oAuth/kakao")
-    public BaseResponse<PostOauthRes> kakaoLogin(@ResponseBody PostOauthReq postOauthReq){
-
-    }*/
+    public BaseResponse<PostOauthRes> kakaoLogin(@RequestBody PostOauthReq postOauthReq){
+        try {
+            PostOauthRes postOauthRes = oAuthService.kakaoLogin(postOauthReq.getAccessToken());
+            return new BaseResponse<>(postOauthRes);
+        } catch(NullPointerException exception){
+            return new BaseResponse<>(PostOauthRes.builder().build());
+        }
+    }
 
 
 

@@ -35,10 +35,10 @@ public class KakaoOAuth2 {
         );
 
         JSONObject body = new JSONObject(response.getBody());
-        String email = body.getJSONObject("kakao_account").getString("email");
         String nickname = body.getJSONObject("properties").getString("nickname");
+        String profileImg = body.getJSONObject("kakao_account").getString("profile_Img");
 
-        return new KakaoUserInfo(nickname,email);
+        return new KakaoUserInfo(nickname,profileImg);
     }
 
 }

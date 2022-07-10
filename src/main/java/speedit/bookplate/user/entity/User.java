@@ -1,15 +1,13 @@
 package speedit.bookplate.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import speedit.bookplate.booklike.entity.BookLike;
 import speedit.bookplate.feed.entity.Feed;
 import speedit.bookplate.feedlike.entity.FeedLike;
 import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.scrap.entity.Scrap;
+import speedit.bookplate.user.dto.UserAuthDto;
 import speedit.bookplate.user.entity.enumTypes.Gender;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;
 import speedit.bookplate.user.entity.enumTypes.UserStatus;
@@ -22,6 +20,8 @@ import java.util.List;
 
 @Entity
 @Getter
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"userId","status","userType","profileImg","nickname", "birth","gender","job","company","token","notification", "companyEmail", "isCertify",
         "introduction", "oAuthType" })
@@ -100,4 +100,12 @@ public class User extends BaseTimeEntity{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OAuthType oAuthType;
+
+    public static User createUser(UserAuthDto userAuthDto){
+        return User.builder()
+                .nickname(userAuthDto.getNickname())
+                .isCertify(false)
+                .notification(false)
+                .build();
+    }
 }
