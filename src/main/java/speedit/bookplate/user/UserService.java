@@ -1,14 +1,11 @@
 package speedit.bookplate.user;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponseStatus;
-import speedit.bookplate.oAuth.dto.PostOauthRes;
-import speedit.bookplate.oAuth.dto.SignInReq;
 import speedit.bookplate.user.dto.UserAuthDto;
 import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.user.entity.User;

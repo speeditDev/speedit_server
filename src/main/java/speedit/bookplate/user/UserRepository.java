@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.user.entity.User;
 import speedit.bookplate.user.entity.enumTypes.UserStatus;
 
