@@ -10,6 +10,8 @@ import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.user.entity.User;
 import speedit.bookplate.utils.JwtService;
 
+import static speedit.bookplate.user.entity.enumTypes.UserStatus.INACTIVE;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -45,6 +47,18 @@ public class UserController {
             UserDto getUserProfile = userService.getUser(userIdx);
             return new BaseResponse<>(getUserProfile);
         }catch(BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+    @GetMapping("/modify/inactive")
+    @ResponseBody
+    public BaseResponse<String> modifyInactive(){
+        try {
+            long userIdx = jwtService.getUserIdx();
+            userService.inactiveUser(userIdx, INACTIVE);
+            return new BaseResponse<>("회원 탈퇴에 성공하였습니다");
+        }catch (BaseException exception){
             return new BaseResponse<>(exception.getStatus());
         }
     }

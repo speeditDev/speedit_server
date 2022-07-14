@@ -12,11 +12,12 @@ import speedit.bookplate.oAuth.dto.SignInReq;
 import speedit.bookplate.user.dto.UserAuthDto;
 import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.user.entity.User;
+import speedit.bookplate.user.entity.enumTypes.UserStatus;
 import speedit.bookplate.utils.JwtService;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class UserService {
 
     private final PasswordEncoder passwordEncoder;
@@ -46,6 +47,11 @@ public class UserService {
         return userRepository.existsByNickname(nickname);
     }
 
+    public void inactiveUser(long userIdx, UserStatus userStatus){
+         userRepository.updateInactiveUser(userIdx,userStatus);
+    }
+
+
     public UserDto getUser(long userIdx){
         return userConverter(userRepository.findByUserIdx(userIdx));
     }
@@ -63,8 +69,6 @@ public class UserService {
         userDto.setIntroduction(userDto.getIntroduction());
         return userDto;
     }
-
-
 
 
 }
