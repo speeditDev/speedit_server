@@ -7,7 +7,6 @@ import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.config.BaseResponseStatus;
 import speedit.bookplate.user.dto.UserDto;
-import speedit.bookplate.user.entity.User;
 import speedit.bookplate.utils.JwtService;
 
 import static speedit.bookplate.user.entity.enumTypes.UserStatus.INACTIVE;
