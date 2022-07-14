@@ -10,6 +10,7 @@ import speedit.bookplate.config.BaseResponseStatus;
 import speedit.bookplate.oAuth.dto.PostOauthRes;
 import speedit.bookplate.oAuth.dto.SignInReq;
 import speedit.bookplate.user.dto.UserAuthDto;
+import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.user.entity.User;
 import speedit.bookplate.utils.JwtService;
 
@@ -43,6 +44,24 @@ public class UserService {
 
     public boolean checkNicknameDuplicate(String nickname){
         return userRepository.existsByNickname(nickname);
+    }
+
+    public UserDto getUser(long userIdx){
+        return userConverter(userRepository.findByUserIdx(userIdx));
+    }
+
+    public UserDto userConverter(User user){
+        UserDto userDto = new UserDto();
+        userDto.setName(user.getName());
+        userDto.setProfileImg(user.getProfileImg());
+        userDto.setNickname(user.getNickname());
+        userDto.setBirth(user.getBirth());
+        userDto.setGender(userDto.getGender());
+        userDto.setJob(userDto.getJob());
+        userDto.setCompany(userDto.getCompany());
+        userDto.setCertify(userDto.isCertify());
+        userDto.setIntroduction(userDto.getIntroduction());
+        return userDto;
     }
 
 
