@@ -25,13 +25,25 @@ public class FollowController {
         this.jwtService = jwtService;
     }
 
-    @PostMapping("/save")
+    @PostMapping("/create")
     @ResponseBody
-    public BaseResponse<String> saveFollow(@RequestBody long follwedId){
+    public BaseResponse<String> createFollow(@RequestBody long followedId){
         try{
             long followerId=jwtService.getUserIdx();
-            followService.createFollow(followerId,follwedId);
+            followService.createFollow(followerId,followedId);
             return new BaseResponse<>("팔로우 등록에 성공하였습니다");
+        }catch(BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public BaseResponse<String> deleteFollow(@RequestBody long followedId){
+        try{
+            long followerId=jwtService.getUserIdx();
+            followService.deleteFollow(followerId,followedId);
+            return new BaseResponse<>("팔로우 취소에 성공하였습니다");
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());
         }
