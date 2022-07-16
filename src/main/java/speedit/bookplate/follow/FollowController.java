@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
+import speedit.bookplate.follow.dto.Follow;
 import speedit.bookplate.utils.JwtService;
 
 @Controller
@@ -27,10 +28,10 @@ public class FollowController {
 
     @PostMapping("/create")
     @ResponseBody
-    public BaseResponse<String> createFollow(@RequestBody long followedId){
+    public BaseResponse<String> createFollow(@RequestBody Follow follow){
         try{
             long followerId=jwtService.getUserIdx();
-            followService.createFollow(followerId,followedId);
+            followService.createFollow(followerId,follow.getFollowedId());
             return new BaseResponse<>("팔로우 등록에 성공하였습니다");
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());
@@ -39,10 +40,10 @@ public class FollowController {
 
     @PostMapping("/delete")
     @ResponseBody
-    public BaseResponse<String> deleteFollow(@RequestBody long followedId){
+    public BaseResponse<String> deleteFollow(@RequestBody Follow follow){
         try{
             long followerId=jwtService.getUserIdx();
-            followService.deleteFollow(followerId,followedId);
+            followService.deleteFollow(followerId,follow.getFollowedId());
             return new BaseResponse<>("팔로우 취소에 성공하였습니다");
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());

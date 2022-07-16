@@ -19,11 +19,9 @@ import java.time.LocalDateTime;
 public class BaseTimeEntity implements Serializable {
 
     @CreatedDate
-    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
 }
