@@ -20,9 +20,10 @@ import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor()
 @ToString(of = {"userId","status","userType","profileImg","nickname", "birth","gender","job","company","token","notification", "companyEmail", "isCertify",
         "introduction", "oAuthType" })
 @Table(name = "user")

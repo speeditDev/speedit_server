@@ -1,4 +1,11 @@
 package speedit.bookplate.follow;
 
-public interface FollowRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import speedit.bookplate.follow.dto.FollowDto;
+import speedit.bookplate.follow.entity.Follow;
+
+@Repository
+public interface FollowRepository extends JpaRepository<Follow,Long> {
+
 }
