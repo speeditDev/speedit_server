@@ -13,15 +13,15 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "follow")
 public class Follow extends BaseTimeEntity {
-
+    
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userIdx")
+    @JoinColumn(name = "followerIdx")
     private User follower_user;
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userIdx")
+    @JoinColumn(name = "followedIdx")
     private User followed_user;
 
 }
