@@ -2,7 +2,6 @@ package speedit.bookplate.follow;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import speedit.bookplate.follow.dto.FollowDto;
 import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.user.UserRepository;
 import speedit.bookplate.user.entity.User;
@@ -25,4 +24,15 @@ public class FollowService {
         Follow follow = Follow.createFollow(follower,followed);
         followRepository.save(follow);
     }
+
+    public void deleteFollow(long followerId,long followedId){
+        User follower=userRepository.findByUserIdx(followerId);
+        User followed=userRepository.findByUserIdx(followedId);
+
+        Follow follow = Follow.createFollow(follower,followed);
+        followRepository.delete(follow);
+    }
+
+
+
 }
