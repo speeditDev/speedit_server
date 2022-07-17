@@ -10,6 +10,6 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class PostOauthRes {
-    private int userIdx;
+    private long userIdx;
     private String jwt;
 }

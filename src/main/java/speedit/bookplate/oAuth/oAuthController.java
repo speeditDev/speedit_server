@@ -26,10 +26,10 @@ public class oAuthController {
     @PostMapping("/oAuth/kakao")
     public BaseResponse<PostOauthRes> kakaoLogin(@RequestBody PostOauthReq postOauthReq){
         try {
-            PostOauthRes postOauthRes = oAuthService.kakaoLogin(postOauthReq.getAccessToken());
+            PostOauthRes postOauthRes = oAuthService.kakaoLogin(postOauthReq.getAccessToken(),postOauthReq.getType());
             return new BaseResponse<>(postOauthRes);
-        } catch(NullPointerException exception){
-            return new BaseResponse<>(PostOauthRes.builder().build());
+        } catch(BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
         }
     }
 

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import speedit.bookplate.user.entity.enumTypes.OAuthType;
 
 @Getter
 @Setter
@@ -11,5 +12,5 @@ import lombok.Setter;
 @Builder
 public class PostOauthReq {
     private String accessToken;
-    private String type;
+    private OAuthType type;
 }

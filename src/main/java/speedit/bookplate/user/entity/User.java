@@ -65,8 +65,6 @@ public class User extends BaseTimeEntity{
     @OneToMany(mappedBy = "followed_user")
     private List<Follow> followed_follows = new ArrayList<>();
 
-    private String name;
-
     private String profileImg;
 
     @Column(nullable = false)
@@ -100,7 +98,7 @@ public class User extends BaseTimeEntity{
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private OAuthType oAuthType;
+    private OAuthType type;
 
     public static User createUser(UserAuthDto userAuthDto){
         return User.builder()

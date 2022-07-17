@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import speedit.bookplate.user.entity.User;
+import speedit.bookplate.user.entity.enumTypes.OAuthType;
 import speedit.bookplate.user.entity.enumTypes.UserStatus;
 
 import java.util.Optional;
@@ -13,6 +14,8 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User,Long> {
 
     Optional<User> findByNickname(String nickname);
+
+    Optional<User> findByNicknameAndType(String nickname,OAuthType type);
 
     boolean existsByNickname(String name);
 
