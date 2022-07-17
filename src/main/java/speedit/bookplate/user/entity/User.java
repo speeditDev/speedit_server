@@ -98,7 +98,7 @@ public class User extends BaseTimeEntity{
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private OAuthType oAuthType;
+    private OAuthType type;
 
     public static User createUser(UserAuthDto userAuthDto){
         return User.builder()

@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import speedit.bookplate.config.BaseException;
+import speedit.bookplate.config.BaseResponseStatus;
 import speedit.bookplate.oAuth.dto.KakaoUserInfo;
 import speedit.bookplate.oAuth.dto.PostOauthRes;
 import speedit.bookplate.oAuth.dto.SignInReq;
@@ -11,6 +13,7 @@ import speedit.bookplate.user.UserRepository;
 import speedit.bookplate.user.UserService;
 import speedit.bookplate.user.dto.UserAuthDto;
 import speedit.bookplate.user.entity.User;
+import speedit.bookplate.user.entity.enumTypes.OAuthType;
 import speedit.bookplate.utils.JwtService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -31,16 +34,17 @@ public class oAuthService {
     @Value("${OAuth.KAKAO_TOKEN}")
     private String KAKAO_TOKEN;*/
 
-    public PostOauthRes kakaoLogin(String accessToken){
+    public PostOauthRes kakaoLogin(String accessToken, OAuthType oAuthType) throws BaseException {
         KakaoUserInfo kakaoUserInfo=kakaoOAuth2.getUserInfo(accessToken);
         String nickname = kakaoUserInfo.getNickname();
         String profileImg =kakaoUserInfo.getProfileImg();
 
-        Optional<User> nicknameUser = userRepository.findByNickname(nickname);
-        if(nicknameUser.isPresent()){
-
-        }else{
-
+        Optional<User> nicknameUser = userRepository.findByNicknameAndType(nickname,oAuthType);
+        try{
+            long userIdx = nicknameUser.get().getUserIdx();
+            return new PostOauthRes(userIdx, jwtService.createJwt(userIdx));
+        }catch(Exception exception){
+            throw new BaseException(BaseResponseStatus.JOIN_USER);
         }
         /*
         User user = null;
@@ -68,9 +72,7 @@ public class oAuthService {
 
          */
 
-
         //return userService.createAccount(signInReq);
-        return PostOauthRes.builder().userIdx(12).build();
     }
 
 

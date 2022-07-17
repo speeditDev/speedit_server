@@ -55,7 +55,6 @@ public class UserService {
 
     public UserDto userConverter(User user){
         UserDto userDto = new UserDto();
-        userDto.setName(user.getName());
         userDto.setProfileImg(user.getProfileImg());
         userDto.setNickname(user.getNickname());
         userDto.setBirth(user.getBirth());

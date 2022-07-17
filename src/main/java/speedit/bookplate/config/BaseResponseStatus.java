@@ -22,7 +22,9 @@ public enum BaseResponseStatus {
     PASSWORD_ENCRYPTION_ERROR(false,404,"비밀번호 암호화에 실패했습니다"),
     PASSWORD_DECRYPTION_ERROR(false,405,"비밀번호 복화화에 실패했습니다"),
     EMPTY_NICKNAME(false,406,"닉네임을 입력해주세요."),
-    DUPLICATE_NICKNAME(false,407,"중복된 닉네임입니다");
+    DUPLICATE_NICKNAME(false,407,"중복된 닉네임입니다"),
+    JOIN_USER(false,408,"회원가입을 진행해주세요");
+
 
 
     private final boolean isSuccess;
