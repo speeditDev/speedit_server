@@ -36,6 +36,12 @@ public class oAuthService {
         String nickname = kakaoUserInfo.getNickname();
         String profileImg =kakaoUserInfo.getProfileImg();
 
+        Optional<User> nicknameUser = userRepository.findByNickname(nickname);
+        if(nicknameUser.isPresent()){
+
+        }else{
+
+        }
         /*
         User user = null;
 

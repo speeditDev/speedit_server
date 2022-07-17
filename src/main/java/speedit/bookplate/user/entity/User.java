@@ -65,8 +65,6 @@ public class User extends BaseTimeEntity{
     @OneToMany(mappedBy = "followed_user")
     private List<Follow> followed_follows = new ArrayList<>();
 
-    private String name;
-
     private String profileImg;
 
     @Column(nullable = false)
