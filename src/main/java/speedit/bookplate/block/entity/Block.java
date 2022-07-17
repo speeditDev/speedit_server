@@ -22,5 +22,12 @@ public class Block extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "targetIdx")
     private User targetUser;
-    
+
+    public static Block createBlock(User memberUser,User targetUser){
+        Block block=new Block();
+        block.memberUser=memberUser;
+        block.targetUser=targetUser;
+        return block;
+    }
+
 }
