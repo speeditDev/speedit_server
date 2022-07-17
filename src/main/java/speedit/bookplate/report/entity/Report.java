@@ -22,5 +22,12 @@ public class Report extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "targetIdx")
     private User targetUser;
-    
+
+    public static Report createReport(User memberUser,User targetUser){
+        Report report=new Report();
+        report.memberUser=memberUser;
+        report.targetUser=targetUser;
+        return report;
+    }
+
 }
