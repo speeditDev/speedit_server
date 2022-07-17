@@ -1,5 +1,6 @@
 package speedit.bookplate.follow;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,19 +13,14 @@ import speedit.bookplate.follow.dto.Follow;
 import speedit.bookplate.utils.JwtService;
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/follow")
 public class FollowController {
 
-    @Autowired
     private FollowService followService;
 
-    @Autowired
     private JwtService jwtService;
 
-    public FollowController(FollowService followService, JwtService jwtService) {
-        this.followService = followService;
-        this.jwtService = jwtService;
-    }
 
     @PostMapping("/create")
     @ResponseBody
