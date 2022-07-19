@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.config.BaseResponseStatus;
+import speedit.bookplate.user.dto.PostUserReq;
 import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.utils.JwtService;
 
@@ -24,6 +25,13 @@ public class UserController {
     public UserController(UserService userService, JwtService jwtService) {
         this.userService = userService;
         this.jwtService = jwtService;
+    }
+
+    @PostMapping("/join")
+    @ResponseBody
+    public BaseResponse<String> join(@RequestBody PostUserReq postUserReq) throws BaseException {
+        userService.createAccount(postUserReq);
+        return new BaseResponse<>("회원가입에 성공하였습니다");
     }
 
     @PostMapping("/checkNickname")
