@@ -7,14 +7,11 @@ import speedit.bookplate.feed.entity.Feed;
 import speedit.bookplate.feedlike.entity.FeedLike;
 import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.scrap.entity.Scrap;
-import speedit.bookplate.user.dto.UserAuthDto;
 import speedit.bookplate.user.entity.enumTypes.Gender;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;
 import speedit.bookplate.user.entity.enumTypes.UserStatus;
-import speedit.bookplate.user.entity.enumTypes.UserType;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +33,6 @@ public class User extends BaseTimeEntity{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus status;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private UserType userType;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
@@ -71,7 +64,7 @@ public class User extends BaseTimeEntity{
     private String nickname;
 
     @Column(nullable = false)
-    private LocalDateTime birth;
+    private int birth;
 
     @Column(nullable = false)
     private Gender gender;
@@ -100,11 +93,4 @@ public class User extends BaseTimeEntity{
     @Enumerated(EnumType.STRING)
     private OAuthType type;
 
-    public static User createUser(UserAuthDto userAuthDto){
-        return User.builder()
-                .nickname(userAuthDto.getNickname())
-                .isCertify(false)
-                .notification(false)
-                .build();
-    }
 }

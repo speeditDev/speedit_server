@@ -2,7 +2,6 @@ package speedit.bookplate.user.dto;
 
 import lombok.*;
 
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,7 +16,7 @@ public class UserDto {
 
     private String nickname;
 
-    private LocalDateTime birth;
+    private int birth;
 
     private String gender;
 
@@ -28,6 +27,10 @@ public class UserDto {
     private boolean isCertify;
 
     private String introduction;
+
+    private boolean notification;
+
+    private String o_auth_token;
 
 
 }
