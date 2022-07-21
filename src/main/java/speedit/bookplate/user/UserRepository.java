@@ -24,4 +24,9 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Modifying
     @Query("UPDATE User u SET u.status=:status WHERE u.userIdx=:userIdx")
     void updateInactiveUser(Long userIdx, UserStatus status);
+
+    @Modifying
+    @Query("")
+    void updateUserProfile();
+
 }

@@ -16,13 +16,14 @@ import speedit.bookplate.utils.JwtService;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = false)
+@Transactional(readOnly = true)
 public class UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final UserRepository userRepository;
 
+    @Transactional
     public PostUserRes createAccount(PostUserReq postUserReq) throws BaseException {
         try{
             User userReq=postUserConverter(postUserReq);
@@ -41,6 +42,7 @@ public class UserService {
         return userRepository.existsByNickname(nickname);
     }
 
+    @Transactional
     public void inactiveUser(long userIdx, UserStatus userStatus){
          userRepository.updateInactiveUser(userIdx,userStatus);
     }
