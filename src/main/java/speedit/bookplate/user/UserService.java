@@ -6,13 +6,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponseStatus;
-import speedit.bookplate.user.dto.PostUserDto;
-import speedit.bookplate.user.dto.PostUserReq;
-import speedit.bookplate.user.dto.PostUserRes;
-import speedit.bookplate.user.dto.UserDto;
+import speedit.bookplate.follow.entity.Follow;
+import speedit.bookplate.user.dto.*;
 import speedit.bookplate.user.entity.User;
 import speedit.bookplate.user.entity.enumTypes.UserStatus;
 import speedit.bookplate.utils.JwtService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -47,9 +48,28 @@ public class UserService {
          userRepository.updateInactiveUser(userIdx,userStatus);
     }
 
+    public List<FollowedUserDto> getFollowedUser(long userIdx){
+        List<User> follwedUser = userRepository.findFollowedByFollowIdx(userIdx);
+        List<FollowedUserDto> followedUserList=new ArrayList<>();
+        for(User user:follwedUser){
+            followedUserList.add(followedUserConverter(user));
+        }
+        return followedUserList;
+    }
+
 
     public UserDto getUser(long userIdx){
         return userConverter(userRepository.findByUserIdx(userIdx));
+    }
+
+
+    public FollowedUserDto followedUserConverter(User user){
+        FollowedUserDto followedUserDto = new FollowedUserDto();
+        followedUserDto.setNickname(user.getNickname());
+        followedUserDto.setCompany(user.getCompany());
+        followedUserDto.setJobs(user.getJobs());
+        followedUserDto.setProfileImg(user.getProfileImg());
+        return followedUserDto;
     }
 
     public UserDto userConverter(User user){
