@@ -8,6 +8,7 @@ import speedit.bookplate.user.UserRepository;
 import speedit.bookplate.user.entity.User;
 import speedit.bookplate.utils.JwtService;
 
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -36,6 +37,7 @@ public class FollowService {
         Follow follow = Follow.createFollow(follower,followed);
         followRepository.delete(follow);
     }
+
 
 
 
