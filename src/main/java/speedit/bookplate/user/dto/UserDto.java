@@ -24,11 +24,11 @@ public class UserDto {
 
     private String company;
 
-    private boolean isCertify;
+    private boolean isEmailCertified;
 
     private String introduction;
 
-    private boolean notification;
+    private boolean alarmAgree;
 
     private String o_auth_token;
 

@@ -93,15 +93,20 @@ public class User extends BaseTimeEntity{
     @Enumerated(EnumType.STRING)
     private OAuthType type;
 
-    public static User postUserConverter(SignUpReq postUserReq){
+    public static User SignUpUser(SignUpReq signUpReq){
+
         return User.builder()
-                .birth(postUserReq.getBirth())
-                .company(postUserReq.getCompany())
-                .gender(postUserReq.getGender())
-                .job(postUserReq.getJobs())
-                .nickname(postUserReq.getNickname())
+                .birth(signUpReq.getBirth())
+                .profileImg(signUpReq.getProfileImg())
+                .status(UserStatus.ACTIVE)
+                .company(signUpReq.getCompany())
+                .gender(signUpReq.getGender())
+                .job(signUpReq.getJob())
+                .nickname(signUpReq.getNickname())
                 .alarmAgree(false)
-                .type(postUserReq.getOAuthType())
+                .isEmailCertified(false)
+                .type(signUpReq.getType())
+                .oAuthToken(signUpReq.getO_auth_token())
                 .build();
     }
 
@@ -113,7 +118,7 @@ public class User extends BaseTimeEntity{
                 .gender(String.valueOf(user.gender))
                 .job(user.job)
                 .company(user.company)
-                .isCertify(user.isEmailCertified)
+                .isEmailCertified(false)
                 .introduction(user.introduction)
                 .build();
     }
@@ -126,8 +131,5 @@ public class User extends BaseTimeEntity{
                 .profileImg(user.profileImg)
                 .build();
     }
-
-
-
 
 }

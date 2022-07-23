@@ -22,8 +22,16 @@ public enum BaseResponseStatus {
     PASSWORD_ENCRYPTION_ERROR(false,404,"비밀번호 암호화에 실패했습니다"),
     PASSWORD_DECRYPTION_ERROR(false,405,"비밀번호 복화화에 실패했습니다"),
     EMPTY_NICKNAME(false,406,"닉네임을 입력해주세요."),
-    DUPLICATE_NICKNAME(false,407,"중복된 닉네임입니다"),
-    JOIN_USER(false,408,"회원가입을 진행해주세요");
+    POST_INVALID_NICKNAME(false,407,"닉네임 형식이 올바르지 않습니다"),
+    DUPLICATE_NICKNAME(false,408,"중복된 닉네임입니다"),
+    POST_EMPTY_JOB(false,409,"직업을 입력해주세요"),
+    POST_EMPTY_OAUTHTOKEN(false,410,"소셜로그인 토큰값을 입력해주세요"),
+    JOIN_USER(false,411,"회원가입을 진행해주세요"),
+
+    /**
+     * 500: RESPONSE 오류
+     */
+    RESPONSE_ERROR(false,500,"값을 불러오는데 실패했습니다.");
 
 
 
