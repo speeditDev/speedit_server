@@ -7,6 +7,9 @@ import speedit.bookplate.feed.entity.Feed;
 import speedit.bookplate.feedlike.entity.FeedLike;
 import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.scrap.entity.Scrap;
+import speedit.bookplate.user.dto.FollowedUserDto;
+import speedit.bookplate.user.dto.PostUserReq;
+import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.user.entity.enumTypes.Gender;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;
 import speedit.bookplate.user.entity.enumTypes.UserStatus;
@@ -20,7 +23,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user")
 public class User extends BaseTimeEntity{
 
     @Id
@@ -68,11 +70,11 @@ public class User extends BaseTimeEntity{
     private Gender gender;
 
     @Column(nullable = false)
-    private String jobs;
+    private String job;
 
     private String company;
 
-    private String token; //FCM 토큰 정보
+    private String fcmToken; //FCM 토큰 정보
 
     @Column(nullable = false)
     private Boolean notification;
@@ -90,5 +92,42 @@ public class User extends BaseTimeEntity{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OAuthType type;
+
+    public static User postUserConverter(PostUserReq postUserReq){
+        return User.builder()
+                .birth(postUserReq.getBirth())
+                .company(postUserReq.getCompany())
+                .gender(postUserReq.getGender())
+                .job(postUserReq.getJobs())
+                .nickname(postUserReq.getNickname())
+                .notification(false)
+                .type(postUserReq.getOAuthType())
+                .build();
+    }
+
+    public static UserDto userConverter(User user){
+        return UserDto.builder()
+                .profileImg(user.profileImg)
+                .nickname(user.nickname)
+                .birth(user.birth)
+                .gender(String.valueOf(user.gender))
+                .job(user.job)
+                .company(user.company)
+                .isCertify(user.isCertify)
+                .introduction(user.introduction)
+                .build();
+    }
+
+    public static FollowedUserDto followedUserConverter(User user){
+        return FollowedUserDto.builder()
+                .nickname(user.nickname)
+                .company(user.company)
+                .jobs(user.job)
+                .profileImg(user.profileImg)
+                .build();
+    }
+
+
+
 
 }
