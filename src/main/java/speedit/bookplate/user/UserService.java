@@ -9,10 +9,8 @@ import speedit.bookplate.user.dto.*;
 import speedit.bookplate.user.entity.User;
 import speedit.bookplate.user.entity.enumTypes.UserStatus;
 import speedit.bookplate.utils.JwtService;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static speedit.bookplate.user.entity.User.*;
 
 @Service
@@ -24,12 +22,12 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public PostUserRes createAccount(PostUserReq postUserReq) throws BaseException {
+    public SignUpRes SignUp(SignUpReq signUpReq) throws BaseException {
         try{
-            User userReq=postUserConverter(postUserReq);
+            User userReq=postUserConverter(signUpReq);
             User save = userRepository.save(userReq);
 
-            PostUserRes res=new PostUserRes();
+            SignUpRes res=new SignUpRes();
             res.setUserIdx(save.getUserIdx());
             res.setJwt(jwtService.createJwt(save.getUserIdx()));
             return res;

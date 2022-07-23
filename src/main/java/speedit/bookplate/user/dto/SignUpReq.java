@@ -7,13 +7,16 @@ import lombok.NoArgsConstructor;
 import speedit.bookplate.user.entity.enumTypes.Gender;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;
 
+import javax.validation.constraints.NotEmpty;
+
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PostUserReq {
+public class SignUpReq {
 
+    @NotEmpty
     private String nickname;
 
     private int birth;
@@ -27,4 +30,6 @@ public class PostUserReq {
     private String o_auth_token;
 
     private OAuthType oAuthType;
+
+
 }

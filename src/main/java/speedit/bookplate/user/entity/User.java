@@ -8,7 +8,7 @@ import speedit.bookplate.feedlike.entity.FeedLike;
 import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.scrap.entity.Scrap;
 import speedit.bookplate.user.dto.FollowedUserDto;
-import speedit.bookplate.user.dto.PostUserReq;
+import speedit.bookplate.user.dto.SignUpReq;
 import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.user.entity.enumTypes.Gender;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;
@@ -77,12 +77,12 @@ public class User extends BaseTimeEntity{
     private String fcmToken; //FCM 토큰 정보
 
     @Column(nullable = false)
-    private Boolean notification;
+    private Boolean alarmAgree;
 
     private String companyEmail;
 
     @Column(nullable = false)
-    private Boolean isCertify;
+    private Boolean isEmailCertified;
 
     private String introduction;
 
@@ -93,14 +93,14 @@ public class User extends BaseTimeEntity{
     @Enumerated(EnumType.STRING)
     private OAuthType type;
 
-    public static User postUserConverter(PostUserReq postUserReq){
+    public static User postUserConverter(SignUpReq postUserReq){
         return User.builder()
                 .birth(postUserReq.getBirth())
                 .company(postUserReq.getCompany())
                 .gender(postUserReq.getGender())
                 .job(postUserReq.getJobs())
                 .nickname(postUserReq.getNickname())
-                .notification(false)
+                .alarmAgree(false)
                 .type(postUserReq.getOAuthType())
                 .build();
     }
@@ -113,7 +113,7 @@ public class User extends BaseTimeEntity{
                 .gender(String.valueOf(user.gender))
                 .job(user.job)
                 .company(user.company)
-                .isCertify(user.isCertify)
+                .isCertify(user.isEmailCertified)
                 .introduction(user.introduction)
                 .build();
     }
