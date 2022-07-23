@@ -17,12 +17,9 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor()
-@ToString(of = {"userId","status","userType","profileImg","nickname", "birth","gender","job","company","token","notification", "companyEmail", "isCertify",
-        "introduction", "oAuthType" })
+@NoArgsConstructor
 @Table(name = "user")
 public class User extends BaseTimeEntity{
 
@@ -83,7 +80,7 @@ public class User extends BaseTimeEntity{
     private String companyEmail;
 
     @Column(nullable = false)
-    private boolean isCertify;
+    private Boolean isCertify;
 
     private String introduction;
 
