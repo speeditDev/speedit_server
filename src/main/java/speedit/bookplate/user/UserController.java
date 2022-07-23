@@ -2,6 +2,7 @@ package speedit.bookplate.user;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
@@ -10,6 +11,8 @@ import speedit.bookplate.user.dto.FollowedUserDto;
 import speedit.bookplate.user.dto.SignUpReq;
 import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.utils.JwtService;
+
+import javax.validation.Valid;
 import java.util.List;
 
 import static speedit.bookplate.user.entity.enumTypes.UserStatus.INACTIVE;
@@ -24,7 +27,7 @@ public class UserController {
 
     @PostMapping("/sign-up")
     @ResponseBody
-    public BaseResponse<String> join(@RequestBody SignUpReq signUpReq) throws BaseException {
+    public BaseResponse<String> SingUp(@RequestBody @Valid SignUpReq signUpReq, Errors errors) throws BaseException {
         userService.SignUp(signUpReq);
         return new BaseResponse<>("회원가입에 성공하였습니다");
     }
