@@ -34,6 +34,12 @@ dependencies {
 	// JSON Parser
 	implementation group: 'org.json', name: 'json', version: '20160810'
 
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//JUnit4 추가
+	testImplementation("org.junit.vintage:junit-vintage-engine") {
+		exclude group: "org.hamcrest", module: "hamcrest-core"
+	}
+
 
 }
 
