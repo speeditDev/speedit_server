@@ -2,7 +2,6 @@ package speedit.bookplate.utils;
 
 import org.springframework.validation.Errors;
 import speedit.bookplate.config.BaseException;
-import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.config.BaseResponseStatus;
 
 public class ValidationExceptionProvider {
