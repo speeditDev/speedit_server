@@ -9,8 +9,10 @@ import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.config.BaseResponseStatus;
 import speedit.bookplate.user.dto.FollowedUserDto;
 import speedit.bookplate.user.dto.SignUpReq;
+import speedit.bookplate.user.dto.SignUpRes;
 import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.utils.JwtService;
+import speedit.bookplate.utils.ValidationExceptionProvider;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,9 +29,13 @@ public class UserController {
 
     @PostMapping("/sign-up")
     @ResponseBody
-    public BaseResponse<String> SingUp(@RequestBody @Valid SignUpReq signUpReq, Errors errors) throws BaseException {
-        userService.SignUp(signUpReq);
-        return new BaseResponse<>("회원가입에 성공하였습니다");
+    public BaseResponse<SignUpRes> SingUp(@RequestBody @Valid SignUpReq signUpReq, Errors errors){
+        SignUpRes signUpRes = userService.SignUp(signUpReq);
+        if(errors.hasErrors()) {
+            BaseException exception = ValidationExceptionProvider.throwValidError(errors);
+            return new BaseResponse<>(exception.getStatus());
+        }
+        return new BaseResponse<>(signUpRes);
     }
 
     @PostMapping("/checkNickname")
