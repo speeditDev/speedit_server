@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostUserRes {
+public class SignUpRes {
     private long userIdx;
     private String jwt;
 }

@@ -7,6 +7,9 @@ import speedit.bookplate.feed.entity.Feed;
 import speedit.bookplate.feedlike.entity.FeedLike;
 import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.scrap.entity.Scrap;
+import speedit.bookplate.user.dto.FollowedUserDto;
+import speedit.bookplate.user.dto.SignUpReq;
+import speedit.bookplate.user.dto.UserDto;
 import speedit.bookplate.user.entity.enumTypes.Gender;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;
 import speedit.bookplate.user.entity.enumTypes.UserStatus;
@@ -17,13 +20,9 @@ import java.util.List;
 
 @Entity
 @Getter
-@Setter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor()
-@ToString(of = {"userId","status","userType","profileImg","nickname", "birth","gender","job","company","token","notification", "companyEmail", "isCertify",
-        "introduction", "oAuthType" })
-@Table(name = "user")
+@NoArgsConstructor
 public class User extends BaseTimeEntity{
 
     @Id
@@ -71,19 +70,19 @@ public class User extends BaseTimeEntity{
     private Gender gender;
 
     @Column(nullable = false)
-    private String jobs;
+    private String job;
 
     private String company;
 
-    private String token; //FCM 토큰 정보
+    private String fcmToken; //FCM 토큰 정보
 
     @Column(nullable = false)
-    private Boolean notification;
+    private Boolean alarmAgree;
 
     private String companyEmail;
 
     @Column(nullable = false)
-    private boolean isCertify;
+    private Boolean isEmailCertified;
 
     private String introduction;
 
@@ -93,5 +92,42 @@ public class User extends BaseTimeEntity{
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OAuthType type;
+
+    public static User postUserConverter(SignUpReq postUserReq){
+        return User.builder()
+                .birth(postUserReq.getBirth())
+                .company(postUserReq.getCompany())
+                .gender(postUserReq.getGender())
+                .job(postUserReq.getJobs())
+                .nickname(postUserReq.getNickname())
+                .alarmAgree(false)
+                .type(postUserReq.getOAuthType())
+                .build();
+    }
+
+    public static UserDto userConverter(User user){
+        return UserDto.builder()
+                .profileImg(user.profileImg)
+                .nickname(user.nickname)
+                .birth(user.birth)
+                .gender(String.valueOf(user.gender))
+                .job(user.job)
+                .company(user.company)
+                .isCertify(user.isEmailCertified)
+                .introduction(user.introduction)
+                .build();
+    }
+
+    public static FollowedUserDto followedUserConverter(User user){
+        return FollowedUserDto.builder()
+                .nickname(user.nickname)
+                .company(user.company)
+                .jobs(user.job)
+                .profileImg(user.profileImg)
+                .build();
+    }
+
+
+
 
 }
