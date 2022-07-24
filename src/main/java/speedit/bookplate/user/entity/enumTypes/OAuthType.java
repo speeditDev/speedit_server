@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum OAuthType {
-    Naver,Apple,Google,Kakao
+    Naver, Apple, Google, Kakao
 }

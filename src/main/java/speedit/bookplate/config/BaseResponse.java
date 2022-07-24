@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.List;
+
 import static speedit.bookplate.config.BaseResponseStatus.SUCCESS;
 
 @Getter
@@ -19,6 +21,7 @@ public class BaseResponse<T>{
     private final int code;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T result;
+    private List<T> results;
 
     //요청에 성공한 경우
     public BaseResponse(T result){
@@ -28,6 +31,13 @@ public class BaseResponse<T>{
         this.result=result;
     }
 
+    //리스트 요청에 성공한 경우
+    public BaseResponse(List<T> results){
+        this.isSuccess=SUCCESS.isSuccess();
+        this.message=SUCCESS.getMessage();
+        this.code=SUCCESS.getCode();
+        this.results=results;
+    }
 
     //요청에 실패한 경우
     public BaseResponse(BaseResponseStatus status) {

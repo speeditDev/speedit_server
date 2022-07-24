@@ -24,4 +24,4 @@ logging:
     #org.hibernate.type: trace #You can see type of values p6py
 
 server:
-  port: 5324
+  port: 5325

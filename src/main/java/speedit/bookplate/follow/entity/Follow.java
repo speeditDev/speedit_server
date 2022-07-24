@@ -17,11 +17,11 @@ public class Follow extends BaseTimeEntity {
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userIdx")
-    private User follower_user;
+    private User follower_user; //팔로우 하는 유저 정보
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userIdx")
-    private User followed_user;
+    private User followed_user; //팔로우 되는 유저 정보
 
 }
