@@ -30,12 +30,13 @@ public class UserController {
     @PostMapping("/sign-up")
     @ResponseBody
     public BaseResponse<SignUpRes> SingUp(@RequestBody @Valid SignUpReq signUpReq, Errors errors){
-        SignUpRes signUpRes = userService.SignUp(signUpReq);
         if(errors.hasErrors()) {
             BaseException exception = ValidationExceptionProvider.throwValidError(errors);
             return new BaseResponse<>(exception.getStatus());
+        }else{
+            SignUpRes signUpRes = userService.SignUp(signUpReq);
+            return new BaseResponse<>(signUpRes);
         }
-        return new BaseResponse<>(signUpRes);
     }
 
     @PostMapping("/checkNickname")
