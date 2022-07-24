@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.config.BaseResponseStatus;
-import speedit.bookplate.user.dto.FollowedUserDto;
-import speedit.bookplate.user.dto.SignUpReq;
-import speedit.bookplate.user.dto.SignUpRes;
-import speedit.bookplate.user.dto.UserDto;
+import speedit.bookplate.user.dto.*;
 import speedit.bookplate.utils.JwtService;
 import speedit.bookplate.utils.ValidationExceptionProvider;
 
@@ -21,7 +18,7 @@ import static speedit.bookplate.user.entity.enumTypes.UserStatus.INACTIVE;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
@@ -39,12 +36,13 @@ public class UserController {
         }
     }
 
-    @PostMapping("/checkNickname")
+    @PostMapping("/nickname")
     @ResponseBody
-    public BaseResponse<String> checkNickname(@RequestBody String nickname){
-        if(nickname.isEmpty()){
-            return new BaseResponse<>(BaseResponseStatus.EMPTY_NICKNAME);
-        } else if(userService.checkNicknameDuplicate(nickname)==true){
+    public BaseResponse<String> checkNickname(@RequestBody @Valid PostNickname postNickname,Errors errors){
+        if(errors.hasErrors()){
+            BaseException exception=ValidationExceptionProvider.throwValidError(errors);
+            return new BaseResponse<>(exception.getStatus());
+        }else if(userService.checkNickname(postNickname.getNickname())){
             return new BaseResponse<>(BaseResponseStatus.DUPLICATE_NICKNAME);
         }else{
             return new BaseResponse<>("사용 가능한 닉네임입니다.");
