@@ -36,8 +36,8 @@ public class UserService {
     }
 
     @Transactional
-    public void inactiveUser(long userIdx, UserStatus userStatus){
-         userRepository.updateInactiveUser(userIdx,userStatus);
+    public void deleteUser(long userIdx, UserStatus userStatus){
+         userRepository.deleteUser(userIdx,userStatus);
     }
 
     public List<FollowedUserDto> getFollowedUser(long userIdx){

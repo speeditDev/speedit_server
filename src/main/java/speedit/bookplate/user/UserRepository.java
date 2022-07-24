@@ -23,7 +23,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     @Modifying
     @Query("UPDATE User u SET u.status=:status WHERE u.userIdx=:userIdx")
-    void updateInactiveUser(Long userIdx, UserStatus status);
+    void deleteUser(Long userIdx, UserStatus status);
 
     @Query("select u from User u left join fetch u.followed_follows WHERE u.userIdx=:followIdx")
     List<User> findFollowedByFollowIdx(Long followIdx);
