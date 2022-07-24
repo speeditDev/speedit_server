@@ -49,7 +49,7 @@ public class UserService {
         return followedUserList;
     }
 
-    public UserDto getUser(long userIdx){
+    public UserDto getUserProfile(long userIdx){
         return userConverter(userRepository.findByUserIdx(userIdx));
     }
 
