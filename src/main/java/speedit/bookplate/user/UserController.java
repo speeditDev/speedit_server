@@ -61,12 +61,12 @@ public class UserController {
         }
     }
 
-    @GetMapping("/modify/inactive")
+    @PostMapping("/delete")
     @ResponseBody
-    public BaseResponse<String> modifyInactive(){
+    public BaseResponse<String> deleteUser(){
         try {
             long userIdx = jwtService.getUserIdx();
-            userService.inactiveUser(userIdx, INACTIVE);
+            userService.deleteUser(userIdx, INACTIVE);
             return new BaseResponse<>("회원 탈퇴에 성공하였습니다");
         }catch (BaseException exception){
             return new BaseResponse<>(exception.getStatus());
