@@ -10,11 +10,9 @@ import lombok.*;
 @Builder
 public class UserDto {
 
-    private String name;
+    private String nickname;
 
     private String profileImg;
-
-    private String nickname;
 
     private int birth;
 
@@ -31,6 +29,5 @@ public class UserDto {
     private boolean alarmAgree;
 
     private String o_auth_token;
-
 
 }

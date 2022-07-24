@@ -49,12 +49,12 @@ public class UserController {
         }
     }
 
-    @GetMapping("/profile")
+    @GetMapping("/profiles")
     @ResponseBody
-    public BaseResponse<UserDto> getUser(){
+    public BaseResponse<UserDto> getUserProfile(){
         try {
             long userIdx = jwtService.getUserIdx();
-            UserDto getUserProfile = userService.getUser(userIdx);
+            UserDto getUserProfile = userService.getUserProfile(userIdx);
             return new BaseResponse<>(getUserProfile);
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());
