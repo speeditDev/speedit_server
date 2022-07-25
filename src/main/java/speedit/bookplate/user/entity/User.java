@@ -5,6 +5,7 @@ import lombok.*;
 import speedit.bookplate.booklike.entity.BookLike;
 import speedit.bookplate.feed.entity.Feed;
 import speedit.bookplate.feedlike.entity.FeedLike;
+import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.scrap.entity.Scrap;
 import speedit.bookplate.user.dto.FollowedUserDto;
 import speedit.bookplate.user.dto.SignUpReq;
@@ -48,13 +49,13 @@ public class User extends BaseTimeEntity{
     @OneToMany(mappedBy = "user")
     private List<Scrap> scraps = new ArrayList<>(); //회원 피드 스크랩 정보
 
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "follower_user")
-//    private List<Follow> follower_follows = new ArrayList<>();
-//
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "followed_user")
-//    private List<Follow> followed_follows = new ArrayList<>();
+    @JsonManagedReference
+    @OneToMany(mappedBy = "follower_user")
+    private List<Follow> follower_follows = new ArrayList<>();
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "followed_user")
+    private List<Follow> followed_follows = new ArrayList<>();
 
     private String name;        //이름
 

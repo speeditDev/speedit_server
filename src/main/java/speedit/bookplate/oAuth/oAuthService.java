@@ -7,7 +7,7 @@ import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponseStatus;
 import speedit.bookplate.oAuth.dto.KakaoUserInfo;
 import speedit.bookplate.oAuth.dto.PostOauthRes;
-import speedit.bookplate.user.UserRepository;
+import speedit.bookplate.user.repositroy.UserRepository;
 import speedit.bookplate.user.UserService;
 import speedit.bookplate.user.entity.User;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;

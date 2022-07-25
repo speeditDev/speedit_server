@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import speedit.bookplate.follow.entity.Follow;
-import speedit.bookplate.user.UserRepository;
+import speedit.bookplate.user.repositroy.UserRepository;
 import speedit.bookplate.user.entity.User;
 import speedit.bookplate.utils.JwtService;
 

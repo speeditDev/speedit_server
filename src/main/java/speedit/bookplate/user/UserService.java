@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import speedit.bookplate.user.dto.*;
 import speedit.bookplate.user.entity.User;
 import speedit.bookplate.user.entity.enumTypes.UserStatus;
+import speedit.bookplate.user.repositroy.UserRepository;
 import speedit.bookplate.utils.JwtService;
 import java.util.ArrayList;
 import java.util.List;
