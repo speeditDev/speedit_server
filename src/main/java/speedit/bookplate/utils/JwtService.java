@@ -21,23 +21,23 @@ public class JwtService {
     @param userIdx
     @return String
      */
+
     public String createJwt(long userIdx){
         Date now = new Date();
         return Jwts.builder()
-                .setHeaderParam("type","jwt")
-                .claim("userIdx",userIdx)
+                .setHeaderParam("type", "jwt")
+                .claim("userIdx", userIdx)
                 .setIssuedAt(now)
-                .setExpiration(new Date(System.currentTimeMillis()+1*(1000*60*60*24*365)))
+                .setExpiration(new Date(System.currentTimeMillis() + 1 * (1000 * 60 * 60 * 24 * 365)))
                 .signWith(SignatureAlgorithm.HS256, Secret.JWT_SECRET_KEY)
                 .compact();
     }
-
     /*
     Header에서 ACCESS-TOKEN으로 JWT 추출
     @return String
      */
-    public String getJwt(){
-        HttpServletRequest request=((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+    public String getJwt() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         return request.getHeader("ACCESS-TOKEN");
     }
 
@@ -46,27 +46,27 @@ public class JwtService {
     @return int
     @throws BaseException
      */
-    public Long getUserIdx() throws BaseException{
+    public Long getUserIdx() throws BaseException {
         //1.JWT 추출
-        String accessToken=getJwt();
-        if(accessToken==null||accessToken.length()==0){
+        String accessToken = getJwt();
+        if (accessToken == null || accessToken.length() == 0) {
             throw new BaseException(BaseResponseStatus.EMPTY_JWT);
         }
 
 
         //2.JWT parsing
         Jws<Claims> claims;
-        try{
-            claims=Jwts.parser()
+        try {
+            claims = Jwts.parser()
                     .setSigningKey(Secret.JWT_SECRET_KEY)
                     .parseClaimsJws(accessToken);
-        }catch(Exception ignored){
+        } catch (Exception ignored) {
             throw new BaseException(BaseResponseStatus.INVALID_JWT);
         }
 
 
         //3.userIdx 추출
-        return claims.getBody().get("userIdx",Long.class);
+        return claims.getBody().get("userIdx", Long.class);
 
     }
 

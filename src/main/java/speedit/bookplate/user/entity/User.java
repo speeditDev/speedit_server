@@ -5,7 +5,6 @@ import lombok.*;
 import speedit.bookplate.booklike.entity.BookLike;
 import speedit.bookplate.feed.entity.Feed;
 import speedit.bookplate.feedlike.entity.FeedLike;
-import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.scrap.entity.Scrap;
 import speedit.bookplate.user.dto.FollowedUserDto;
 import speedit.bookplate.user.dto.SignUpReq;
@@ -27,40 +26,42 @@ public class User extends BaseTimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userIdx;
+    private Long userIdx;       //유저 고유번호
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserStatus status;
+    private UserStatus status;  //유저 상태
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
-    private List<Feed> feeds = new ArrayList<>();
+    private List<Feed> feeds = new ArrayList<>(); //회원 등록 피드 정보
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
-    private List<BookLike> bookLikes = new ArrayList<>();
+    private List<BookLike> bookLikes = new ArrayList<>(); //회원 책 좋아요 정보
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
-    private List<FeedLike> feedLikes = new ArrayList<>();
+    private List<FeedLike> feedLikes = new ArrayList<>(); //회원피드 좋아요 정보
 
     @JsonManagedReference
     @OneToMany(mappedBy = "user")
-    private List<Scrap> scraps = new ArrayList<>();
+    private List<Scrap> scraps = new ArrayList<>(); //회원 피드 스크랩 정보
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "follower_user")
-    private List<Follow> follower_follows = new ArrayList<>();
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "follower_user")
+//    private List<Follow> follower_follows = new ArrayList<>();
+//
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "followed_user")
+//    private List<Follow> followed_follows = new ArrayList<>();
 
-    @JsonManagedReference
-    @OneToMany(mappedBy = "followed_user")
-    private List<Follow> followed_follows = new ArrayList<>();
+    private String name;        //이름
 
     private String profileImg;
 
     @Column(nullable = false)
-    private String nickname;
+    private String nickname;    //닉네임
 
     @Column(nullable = false)
     private int birth;
@@ -72,22 +73,24 @@ public class User extends BaseTimeEntity{
     @Column(nullable = false)
     private String job;
 
-    private String company;
+
+    private String company;     //소속 회사명
 
     private String fcmToken; //FCM 토큰 정보
 
     @Column(nullable = false)
     private Boolean alarmAgree;
 
-    private String companyEmail;
+
+    private String companyEmail;  //회사 이메일
 
     @Column(nullable = false)
     private Boolean isEmailCertified;
 
-    private String introduction;
+    private String introduction; //유저 소개글
 
     @Column(nullable = false)
-    private String oAuthToken;
+    private String oAuthToken;  //소셜 로그인 타입
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -131,5 +134,7 @@ public class User extends BaseTimeEntity{
                 .profileImg(user.profileImg)
                 .build();
     }
+
+    private OAuthType oAuthType; //소셜 로그인 토큰 정보
 
 }

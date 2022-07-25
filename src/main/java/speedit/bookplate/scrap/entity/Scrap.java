@@ -1,10 +1,9 @@
 package speedit.bookplate.scrap.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import speedit.bookplate.book.entity.Book;
+import speedit.bookplate.feed.entity.Feed;
+import speedit.bookplate.feed.entity.enumTypes.Status;
 import speedit.bookplate.user.entity.BaseTimeEntity;
 import speedit.bookplate.user.entity.User;
 
@@ -13,22 +12,34 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"status"})
 @Table(name = "scrap")
 public class Scrap extends BaseTimeEntity {
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userIdx")
-    private User user;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long scrapId;   //스크랩 고유번호
 
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bookIdx")
-    private Book book;
+    @JoinColumn(name = "userIdx")
+    private User user;  //스크랩한 유저 정보
+
+    @Id
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "feedIdx")
+    private Feed feed;  //스크랩한 피드 정보
 
     @Column(nullable = false)
-    private Boolean status;
+    private Boolean status; //스크랩 상태
+
+    public static Scrap createScrap(Feed feed){
+        Scrap scrap = new Scrap();
+        scrap.setFeed(feed);
+        scrap.setStatus(true);
+        return scrap;
+    }
 
 }

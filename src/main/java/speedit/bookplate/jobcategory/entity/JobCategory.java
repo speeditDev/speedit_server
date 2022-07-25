@@ -14,15 +14,15 @@ import javax.persistence.Id;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"jobcgId","job","status"})
+@ToString(of = {"jobCategoryId", "job", "status"})
 public class JobCategory extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long jobCategoryId;
+    private Long jobCategoryId; //직업 카테고리 고유번호
 
-    private String job;
+    private String job; //직업
 
-    private Boolean status;    //선택 여부
+    private Boolean status; //선택 여부
 
 }

@@ -7,5 +7,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum Gender {
     //M: 남자, W: 여자
-    M,W
+    M, W
 }
