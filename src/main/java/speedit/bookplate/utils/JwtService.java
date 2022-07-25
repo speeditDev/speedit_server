@@ -31,7 +31,6 @@ public class JwtService {
                 .signWith(SignatureAlgorithm.HS256, Secret.JWT_SECRET_KEY)
                 .compact();
     }
-
     /*
     Header에서 ACCESS-TOKEN으로 JWT 추출
     @return String
