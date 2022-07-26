@@ -2,13 +2,12 @@ package speedit.bookplate.block;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import speedit.bookplate.block.dto.BlockDto;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
+import speedit.bookplate.user.repositroy.UserRepository;
+import speedit.bookplate.user.entity.User;
 import speedit.bookplate.utils.JwtService;
 
 @Controller
@@ -20,20 +19,23 @@ public class BlockController {
 
     private final JwtService jwtService;
 
-    @PostMapping("/create")
+    private final UserRepository userRepository;
+
+    @PostMapping("")
     @ResponseBody
     public BaseResponse<String> createBlock(@RequestBody BlockDto blockDto){
         try{
-            long memberUserIdx=jwtService.getUserIdx();
-            blockService.createBlock(memberUserIdx,blockDto.getTargetIdx());
-            return new BaseResponse<>("차단에 성공하였습니다.");
+            long mainUserIdx=jwtService.getUserIdx();
+            User user1=userRepository.findByUserIdx(mainUserIdx);
+            if (blockService.testBlock(user1,blockDto.getTargetIdx())) {
+                return new BaseResponse<String>("이미 차단된 유저입니다.");
+            }else{
+                blockService.createBlock(mainUserIdx,blockDto.getTargetIdx());
+                return new BaseResponse<>("차단에 성공하였습니다.");
+            }
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());
         }
-
     }
-
-
-
 
 }

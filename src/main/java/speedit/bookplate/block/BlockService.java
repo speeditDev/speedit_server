@@ -17,10 +17,20 @@ public class BlockService {
     private final BlockRepository blockRepository;
 
     @Transactional
-    public void createBlock(long memberUserIdx,long targetUserIdx){
-        User memberUser=userRepository.findByUserIdx(memberUserIdx);
+    public void createBlock(long mainUserIdx,long targetUserIdx){
+        User mainUser=userRepository.findByUserIdx(mainUserIdx);
         User targetUser=userRepository.findByUserIdx(targetUserIdx);
-        Block.createBlock(memberUser,targetUser);
+        Block.createBlock(mainUser,targetUser);
+    }
+
+    public boolean testBlock(User memberUser,long targetIdx){
+        User testUser=blockRepository.findByMemberUser(memberUser).getMemberUser();
+        long testIdx=blockRepository.findByMemberUser(memberUser).getTargetUser().getUserIdx();
+        if(testIdx==targetIdx && testUser==memberUser){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
