@@ -1,30 +1,43 @@
 package speedit.bookplate.report;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import speedit.bookplate.report.entity.Report;
 import speedit.bookplate.user.repositroy.UserRepository;
 import speedit.bookplate.user.entity.User;
 
+import java.util.ArrayList;
+
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Transactional(readOnly = true)
 public class ReportService {
 
-    private final ReportRepository reportRepository;
-
     private final UserRepository userRepository;
 
-    @Transactional
-    public void createReport(long memberUserIdx, long targetUserIdx){
-        User memberUser = userRepository.findByUserIdx(memberUserIdx);
-        User targetUser = userRepository.findByUserIdx(targetUserIdx);
+    private final ReportRepository reportRepository;
 
-        Report report = Report.createReport(memberUser, targetUser);
+    @Transactional
+    public void createReport(long userIdx, long targetIdx){
+        User user = userRepository.findByUserIdx(userIdx);
+        User targetUser = userRepository.findByUserIdx(targetIdx);
+
+        Report report = Report.createReport(user, targetUser);
         reportRepository.save(report);
     }
 
+    public boolean checkReport(User user,long targetIdx){
+        ArrayList<Long> target=new ArrayList<>();
+        for(Report report:reportRepository.findByMemberUser(user)){
+            target.add(report.getTargetUser().getUserIdx());
+        }
 
+        if(target.contains(targetIdx)){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 }

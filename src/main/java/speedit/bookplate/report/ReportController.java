@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.report.dto.ReportDto;
+import speedit.bookplate.user.entity.User;
+import speedit.bookplate.user.repositroy.UserRepository;
 import speedit.bookplate.utils.JwtService;
 
 @Controller
@@ -18,20 +20,25 @@ public class ReportController {
 
     private ReportService reportService;
 
+    private UserRepository userRepository;
+
     private JwtService jwtService;
 
-    @PostMapping("/create")
+    @PostMapping("")
     @ResponseBody
     public BaseResponse<String> createReport(@RequestBody ReportDto reportDto){
         try{
-            long memberUserIdx=jwtService.getUserIdx();
-            reportService.createReport(memberUserIdx,reportDto.getTargetId());
-            return new BaseResponse<>("유저 신고하기 성공");
+            long userIdx=jwtService.getUserIdx();
+            User memberUser = userRepository.findByUserIdx(userIdx);
+            if(reportService.checkReport(memberUser,reportDto.getTargetIdx())){
+                return new BaseResponse<>("이미 신고가 된 유저입니다.");
+            }else{
+                reportService.createReport(userIdx,reportDto.getTargetIdx());
+                return new BaseResponse<>("유저 신고하기 성공");
+            }
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());
         }
     }
-
-
 
 }
