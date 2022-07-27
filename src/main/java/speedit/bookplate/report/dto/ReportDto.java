@@ -5,6 +5,6 @@ import lombok.Getter;
 @Getter
 public class ReportDto {
 
-    private long targetId;
+    private long targetIdx;
 
 }

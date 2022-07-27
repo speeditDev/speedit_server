@@ -19,16 +19,16 @@ public class BlockService {
     private final BlockRepository blockRepository;
 
     @Transactional
-    public void createBlock(long mainUserIdx,long targetUserIdx){
-        User mainUser=userRepository.findByUserIdx(mainUserIdx);
+    public void createBlock(long userIdx,long targetUserIdx){
+        User user=userRepository.findByUserIdx(userIdx);
         User targetUser=userRepository.findByUserIdx(targetUserIdx);
-        Block mainBlock = Block.createBlock(mainUser, targetUser);
+        Block mainBlock = Block.createBlock(user, targetUser);
         blockRepository.save(mainBlock);
     }
 
-    public boolean checkBlock(User memberUser,long targetIdx){
+    public boolean checkBlock(User user,long targetIdx){
         ArrayList<Long> target=new ArrayList<Long>();
-        for(Block block:blockRepository.findByMemberUser(memberUser)){
+        for(Block block:blockRepository.findByMemberUser(user)){
             target.add(block.getTargetUser().getUserIdx());
         }
         if(target.contains(targetIdx)){
