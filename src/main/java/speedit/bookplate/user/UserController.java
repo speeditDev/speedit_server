@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.config.BaseResponseStatus;
-import speedit.bookplate.follow.follow.FollowService;
+import speedit.bookplate.follow.FollowService;
 import speedit.bookplate.user.dto.*;
 import speedit.bookplate.utils.JwtService;
 import speedit.bookplate.utils.ValidationExceptionProvider;
