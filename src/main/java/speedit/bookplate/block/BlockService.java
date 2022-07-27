@@ -7,6 +7,9 @@ import speedit.bookplate.block.entity.Block;
 import speedit.bookplate.user.repositroy.UserRepository;
 import speedit.bookplate.user.entity.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 @Transactional(readOnly = true)
@@ -20,17 +23,24 @@ public class BlockService {
     public void createBlock(long mainUserIdx,long targetUserIdx){
         User mainUser=userRepository.findByUserIdx(mainUserIdx);
         User targetUser=userRepository.findByUserIdx(targetUserIdx);
-        Block.createBlock(mainUser,targetUser);
+        Block mainBlock = Block.createBlock(mainUser, targetUser);
+        blockRepository.save(mainBlock);
     }
 
     public boolean testBlock(User memberUser,long targetIdx){
-        User testUser=blockRepository.findByMemberUser(memberUser).getMemberUser();
-        long testIdx=blockRepository.findByMemberUser(memberUser).getTargetUser().getUserIdx();
-        if(testIdx==targetIdx && testUser==memberUser){
+
+        ArrayList<Long> target=new ArrayList<Long>();
+
+        for(Block block:blockRepository.findByMemberUser(memberUser)){
+            target.add(block.getTargetUser().getUserIdx());
+        }
+
+        if(target.contains(targetIdx)){
             return true;
         }else{
             return false;
         }
+        
     }
 
 }

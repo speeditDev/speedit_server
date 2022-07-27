@@ -5,9 +5,11 @@ import org.springframework.stereotype.Repository;
 import speedit.bookplate.block.entity.Block;
 import speedit.bookplate.user.entity.User;
 
+import java.util.List;
+
 @Repository
 public interface BlockRepository extends JpaRepository<Block,Long> {
 
-    Block findByMemberUser(User user);
+    List<Block> findByMemberUser(User user);
 
 }
