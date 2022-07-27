@@ -30,12 +30,4 @@ public class Block extends BaseTimeEntity {
         return block;
     }
 
-    @Override
-    public String toString() {
-        return "Block{" +
-                "blockIdx=" + blockIdx +
-                ", memberUser=" + memberUser +
-                ", targetUser=" + targetUser +
-                '}';
-    }
 }

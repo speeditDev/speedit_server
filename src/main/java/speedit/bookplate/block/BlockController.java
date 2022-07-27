@@ -25,12 +25,12 @@ public class BlockController {
     @ResponseBody
     public BaseResponse<String> createBlock(@RequestBody BlockDto blockDto){
         try{
-            long mainUserIdx=jwtService.getUserIdx();
-            User user1=userRepository.findByUserIdx(mainUserIdx);
-            if (blockService.testBlock(user1,blockDto.getTargetIdx())) {
-                return new BaseResponse<String>("이미 차단된 유저입니다.");
+            long memberIdx=jwtService.getUserIdx();
+            User memberUser=userRepository.findByUserIdx(memberIdx);
+            if (blockService.checkBlock(memberUser,blockDto.getTargetIdx())) {
+                return new BaseResponse<>("이미 차단된 유저입니다.");
             }else{
-                blockService.createBlock(mainUserIdx,blockDto.getTargetIdx());
+                blockService.createBlock(memberIdx,blockDto.getTargetIdx());
                 return new BaseResponse<>("차단에 성공하였습니다.");
             }
         }catch(BaseException exception){
