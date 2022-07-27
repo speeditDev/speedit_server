@@ -41,6 +41,11 @@ public class UserService {
          userRepository.deleteUser(userIdx,userStatus);
     }
 
+    @Transactional
+    public void modifyProfile(long userIdx,String nickname,String profileImg,String job,String company,boolean isEmailCertified,String intro){
+        userRepository.modifyProfile(userIdx,nickname,profileImg,job,company,isEmailCertified,intro);
+    }
+
     public List<FollowedUserDto> getFollowedUser(long userIdx){
         List<User> follwedUser = userRepository.findFollowedByFollowIdx(userIdx);
         List<FollowedUserDto> followedUserList=new ArrayList<>();
