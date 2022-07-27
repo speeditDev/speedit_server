@@ -10,4 +10,6 @@ import speedit.bookplate.follow.entity.Follow;
 @Repository
 public interface FollowRepository extends JpaRepository<Follow,Long> {
 
+
+
 }

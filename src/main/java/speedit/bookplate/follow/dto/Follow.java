@@ -9,6 +9,6 @@ import lombok.*;
 @Builder
 public class Follow {
 
-    private long followedId;
+    private long followIdx;
 
 }
