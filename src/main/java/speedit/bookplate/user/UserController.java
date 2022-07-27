@@ -7,13 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.config.BaseResponseStatus;
-import speedit.bookplate.follow.FollowService;
+import speedit.bookplate.follow.follow.FollowService;
 import speedit.bookplate.user.dto.*;
 import speedit.bookplate.utils.JwtService;
 import speedit.bookplate.utils.ValidationExceptionProvider;
 
 import javax.validation.Valid;
-import java.util.List;
 
 import static speedit.bookplate.user.entity.enumTypes.UserStatus.INACTIVE;
 
@@ -75,12 +74,24 @@ public class UserController {
         }
     }
 
+    @PatchMapping("/modify")
+    @ResponseBody
+    public BaseResponse<String> modifyProfile(@RequestBody UpdateProfileDto updateProfileDto){
+        try{
+            long userIdx=jwtService.getUserIdx();
+            userService.modifyProfile(userIdx,updateProfileDto.getProfileImg(),
+                    updateProfileDto.getNickname(), updateProfileDto.getJob(), updateProfileDto.getCompany(),
+                    updateProfileDto.isEmailCertified(), updateProfileDto.getIntroduction());
 
+            return new BaseResponse<>("프로필 수정에 성공하였습니다.");
+        }catch(BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
 
     @GetMapping("/getFollowedUser")
     @ResponseBody
     public BaseResponse<String> getFollowed(){
-
         try{
             long userIdx=jwtService.getUserIdx();
             //followService.getFollowingUser(userIdx);
@@ -88,7 +99,6 @@ public class UserController {
         } catch (BaseException exception) {
             return new BaseResponse<>(exception.getStatus());
         }
-
     }
 
 
