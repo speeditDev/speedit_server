@@ -20,6 +20,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     User findByUserIdx(Long userIdx);
 
+    List<User> findByJob(String job);
+
     @Modifying
     @Query("UPDATE User u SET u.status=:status WHERE u.userIdx=:userIdx")
     void deleteUser(Long userIdx, UserStatus status);
@@ -27,8 +29,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Modifying
     @Query("UPDATE User u SET u.profileImg=:profileImg,u.nickname=:nickname,u.profileImg=:profileImg,u.job=:job,u.company=:company,u.isEmailCertified=:isEmailCertified,u.introduction=:introduction where u.userIdx=:userIdx")
     void modifyProfile(Long userIdx,String nickname,String profileImg,String job,String company,boolean isEmailCertified,String introduction);
-
-    @Query("select u from User u left join fetch u.followed_follows WHERE u.userIdx=:followIdx")
-    List<User> findFollowedByFollowIdx(Long followIdx);
 
 }

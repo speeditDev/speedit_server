@@ -74,7 +74,6 @@ public class User extends BaseTimeEntity{
     @Column(nullable = false)
     private String job;
 
-
     private String company;     //소속 회사명
 
     private String fcmToken; //FCM 토큰 정보

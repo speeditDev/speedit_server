@@ -46,17 +46,24 @@ public class UserService {
         userRepository.modifyProfile(userIdx,nickname,profileImg,job,company,isEmailCertified,intro);
     }
 
-    public List<FollowedUserDto> getFollowedUser(long userIdx){
-        List<User> follwedUser = userRepository.findFollowedByFollowIdx(userIdx);
-        List<FollowedUserDto> followedUserList=new ArrayList<>();
-        for(User user:follwedUser){
-            followedUserList.add(followedUserConverter(user));
-        }
-        return followedUserList;
-    }
-
     public UserDto getUserProfile(long userIdx){
         return userConverter(userRepository.findByUserIdx(userIdx));
+    }
+
+    public List<UserDto> getUserRecommend(long userIdx){
+        User member = userRepository.findByUserIdx(userIdx);
+        String job=member.getJob();
+        List<User> user = userRepository.findByJob(job);
+        List<UserDto> arr = new ArrayList<>();
+        int cnt=0;
+        for(User test:user){
+            if(cnt==3){
+                break;
+            }
+            arr.add(User.userConverter(test));
+            cnt+=1;
+        }
+        return arr;
     }
 
 }

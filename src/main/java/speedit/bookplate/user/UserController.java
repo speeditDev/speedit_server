@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.config.BaseResponseStatus;
-import speedit.bookplate.follow.FollowService;
 import speedit.bookplate.user.dto.*;
 import speedit.bookplate.utils.JwtService;
 import speedit.bookplate.utils.ValidationExceptionProvider;
 
 import javax.validation.Valid;
+
+import java.util.List;
 
 import static speedit.bookplate.user.entity.enumTypes.UserStatus.INACTIVE;
 
@@ -22,7 +23,6 @@ import static speedit.bookplate.user.entity.enumTypes.UserStatus.INACTIVE;
 public class UserController {
 
     private UserService userService;
-    private FollowService followService;
     private JwtService jwtService;
 
     @PostMapping("/sign-up")
@@ -89,16 +89,13 @@ public class UserController {
         }
     }
 
-    @GetMapping("/getFollowedUser")
+
+    @GetMapping("/recommend")
     @ResponseBody
-    public BaseResponse<String> getFollowed(){
-        try{
-            long userIdx=jwtService.getUserIdx();
-            //followService.getFollowingUser(userIdx);
-            return new BaseResponse<>("팔로잉 목록 조회에 성공했습니다");
-        } catch (BaseException exception) {
-            return new BaseResponse<>(exception.getStatus());
-        }
+    public BaseResponse<List<UserDto>> recommendUser() throws BaseException {
+        long userIdx=jwtService.getUserIdx();
+        userService.getUserRecommend(userIdx);
+        return new BaseResponse<List<UserDto>>(userService.getUserRecommend(userIdx));
     }
 
 
