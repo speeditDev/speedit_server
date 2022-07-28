@@ -42,10 +42,10 @@ public class FollowService {
         List<FollowedDto> array = new ArrayList<>();
         for(Follow follow:followRepository.findByFollower(memberUser)){
             FollowedDto dto = new FollowedDto();
-            dto.setProfileImg(follow.getFollower().getProfileImg());
-            dto.setNickname(follow.getFollower().getNickname());
-            dto.setJob(follow.getFollower().getJob());
-            dto.setCompany(follow.getFollower().getCompany());
+            dto.setProfileImg(follow.getFollowed().getProfileImg());
+            dto.setNickname(follow.getFollowed().getNickname());
+            dto.setJob(follow.getFollowed().getJob());
+            dto.setCompany(follow.getFollowed().getCompany());
             array.add(dto);
         }
         return array;
