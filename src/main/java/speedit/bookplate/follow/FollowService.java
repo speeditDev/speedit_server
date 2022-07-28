@@ -37,7 +37,7 @@ public class FollowService {
         followRepository.delete(follow);
     }
 
-    public List<FollowedDto> getFollow(long followerIdx){
+    public List<FollowedDto> getFollowing(long followerIdx){
         User memberUser = userRepository.findByUserIdx(followerIdx);
         List<FollowedDto> array = new ArrayList<>();
         for(Follow follow:followRepository.findByFollower(memberUser)){
@@ -51,5 +51,18 @@ public class FollowService {
         return array;
     }
 
+    public List<FollowedDto> getFollowed(long followerIdx) {
+        User memberUser = userRepository.findByUserIdx(followerIdx);
+        List<FollowedDto> array = new ArrayList<>();
+        for (Follow follow : followRepository.findByFollowed(memberUser)) {
+            FollowedDto dto = new FollowedDto();
+            dto.setProfileImg(follow.getFollower().getProfileImg());
+            dto.setNickname(follow.getFollower().getNickname());
+            dto.setJob(follow.getFollower().getJob());
+            dto.setCompany(follow.getFollower().getCompany());
+            array.add(dto);
+        }
+        return array;
+    }
 
 }

@@ -45,12 +45,24 @@ public class FollowController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping("/following")
     @ResponseBody
-    public BaseResponse<List<FollowedDto>> getFollow(){
+    public BaseResponse<List<FollowedDto>> getFollowing(){
         try{
             long follwerId = jwtService.getUserIdx();
-            List<FollowedDto> followedDtos = followService.getFollow(follwerId);
+            List<FollowedDto> followedDtos = followService.getFollowing(follwerId);
+            return new BaseResponse<List<FollowedDto>>(followedDtos);
+        }catch(BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+    @GetMapping("/followed")
+    @ResponseBody
+    public BaseResponse<List<FollowedDto>> getFollowed(){
+        try {
+            long followerId = jwtService.getUserIdx();
+            List<FollowedDto> followedDtos = followService.getFollowed(followerId);
             return new BaseResponse<List<FollowedDto>>(followedDtos);
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());
