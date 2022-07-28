@@ -3,9 +3,12 @@ package speedit.bookplate.follow;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import speedit.bookplate.follow.dto.FollowedDto;
 import speedit.bookplate.follow.entity.Follow;
 import speedit.bookplate.user.repositroy.UserRepository;
 import speedit.bookplate.user.entity.User;
+
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +35,20 @@ public class FollowService {
 
         Follow follow = Follow.createFollow(follower,followed);
         followRepository.delete(follow);
+    }
+
+    public List<FollowedDto> getFollow(long followerIdx){
+        User memberUser = userRepository.findByUserIdx(followerIdx);
+        List<FollowedDto> array = new ArrayList<>();
+        for(Follow follow:followRepository.findByFollower(memberUser)){
+            FollowedDto dto = new FollowedDto();
+            dto.setProfileImg(follow.getFollower().getProfileImg());
+            dto.setNickname(follow.getFollower().getNickname());
+            dto.setJob(follow.getFollower().getJob());
+            dto.setCompany(follow.getFollower().getCompany());
+            array.add(dto);
+        }
+        return array;
     }
 
 

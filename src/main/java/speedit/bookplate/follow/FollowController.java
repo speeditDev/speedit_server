@@ -6,7 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import speedit.bookplate.config.BaseException;
 import speedit.bookplate.config.BaseResponse;
 import speedit.bookplate.follow.dto.Follow;
+import speedit.bookplate.follow.dto.FollowedDto;
+import speedit.bookplate.user.entity.User;
 import speedit.bookplate.utils.JwtService;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -36,6 +40,18 @@ public class FollowController {
             long followerId=jwtService.getUserIdx();
             followService.deleteFollow(followerId,follow.getFollowIdx());
             return new BaseResponse<>("팔로우 취소에 성공하였습니다");
+        }catch(BaseException exception){
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+    @GetMapping("")
+    @ResponseBody
+    public BaseResponse<List<FollowedDto>> getFollow(){
+        try{
+            long follwerId = jwtService.getUserIdx();
+            List<FollowedDto> followedDtos = followService.getFollow(follwerId);
+            return new BaseResponse<List<FollowedDto>>(followedDtos);
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());
         }

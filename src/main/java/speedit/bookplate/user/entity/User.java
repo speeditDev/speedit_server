@@ -50,11 +50,11 @@ public class User extends BaseTimeEntity{
     private List<Scrap> scraps = new ArrayList<>(); //회원 피드 스크랩 정보
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "follower_user")
+    @OneToMany(mappedBy = "follower")
     private List<Follow> follower_follows = new ArrayList<>();
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "followed_user")
+    @OneToMany(mappedBy = "followed")
     private List<Follow> followed_follows = new ArrayList<>();
 
     private String name;        //이름
