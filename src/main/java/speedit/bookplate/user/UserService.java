@@ -50,4 +50,20 @@ public class UserService {
         return userConverter(userRepository.findByUserIdx(userIdx));
     }
 
+    public List<UserDto> getUserRecommend(long userIdx){
+        User member = userRepository.findByUserIdx(userIdx);
+        String job=member.getJob();
+        List<User> user = userRepository.findByJob(job);
+        List<UserDto> arr = new ArrayList<>();
+        int cnt=0;
+        for(User test:user){
+            if(cnt==3){
+                break;
+            }
+            arr.add(User.userConverter(test));
+            cnt+=1;
+        }
+        return arr;
+    }
+
 }

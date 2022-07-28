@@ -8,6 +8,7 @@ import speedit.bookplate.user.entity.User;
 import speedit.bookplate.user.entity.enumTypes.OAuthType;
 import speedit.bookplate.user.entity.enumTypes.UserStatus;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -18,6 +19,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
     boolean existsByNickname(String name);
 
     User findByUserIdx(Long userIdx);
+
+    List<User> findByJob(String job);
 
     @Modifying
     @Query("UPDATE User u SET u.status=:status WHERE u.userIdx=:userIdx")

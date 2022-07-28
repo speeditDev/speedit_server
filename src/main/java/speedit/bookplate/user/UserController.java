@@ -13,6 +13,8 @@ import speedit.bookplate.utils.ValidationExceptionProvider;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static speedit.bookplate.user.entity.enumTypes.UserStatus.INACTIVE;
 
 @Controller
@@ -85,6 +87,15 @@ public class UserController {
         }catch(BaseException exception){
             return new BaseResponse<>(exception.getStatus());
         }
+    }
+
+
+    @GetMapping("/recommend")
+    @ResponseBody
+    public BaseResponse<List<UserDto>> recommendUser() throws BaseException {
+        long userIdx=jwtService.getUserIdx();
+        userService.getUserRecommend(userIdx);
+        return new BaseResponse<List<UserDto>>(userService.getUserRecommend(userIdx));
     }
 
 
