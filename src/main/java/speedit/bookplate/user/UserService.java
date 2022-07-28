@@ -46,15 +46,6 @@ public class UserService {
         userRepository.modifyProfile(userIdx,nickname,profileImg,job,company,isEmailCertified,intro);
     }
 
-    public List<FollowedUserDto> getFollowedUser(long userIdx){
-        List<User> follwedUser = userRepository.findFollowedByFollowIdx(userIdx);
-        List<FollowedUserDto> followedUserList=new ArrayList<>();
-        for(User user:follwedUser){
-            followedUserList.add(followedUserConverter(user));
-        }
-        return followedUserList;
-    }
-
     public UserDto getUserProfile(long userIdx){
         return userConverter(userRepository.findByUserIdx(userIdx));
     }
