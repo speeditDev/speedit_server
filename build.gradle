@@ -42,7 +42,6 @@ dependencies {
 
 	//이메일 인증
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	//JUnit4 추가
