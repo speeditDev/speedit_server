@@ -9,12 +9,11 @@ import speedit.bookplate.user.entity.User;
 
 import javax.persistence.*;
 
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"status"})
+@ToString(of = {"scrapId","status"})
 @Table(name = "scrap")
 public class Scrap extends BaseTimeEntity {
 
@@ -22,12 +21,10 @@ public class Scrap extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scrapId;   //스크랩 고유번호
 
-    @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userIdx")
     private User user;  //스크랩한 유저 정보
 
-    @Id
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feedIdx")
     private Feed feed;  //스크랩한 피드 정보
@@ -41,5 +38,4 @@ public class Scrap extends BaseTimeEntity {
         scrap.setStatus(true);
         return scrap;
     }
-
 }
