@@ -17,6 +17,18 @@ spring:
       hibernate:
         #show_sql: true Output from systemout / In a production environment, logs should be taken through a logger
         format_sql: true
+  mail:
+    port: 587
+    host: smtp.gmail.com
+    username: sample.google.com
+    password: google
+    properties:
+        mail:
+          smtp:
+            auth: true
+            startles:
+              enable: true
+
 
 logging:
   level:
